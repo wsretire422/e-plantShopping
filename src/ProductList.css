@@ -36,7 +36,25 @@ body {
     color: white;
     font-size: 30px;
     text-decoration: none;
-   
+    margin-left: 30;
+}
+
+.plant-tag {
+    margin-left: 220px;
+}
+
+.cart-logo {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-number {
+    position: absolute;
+    top: 46%;
+    left: 40%;
+    transform: translateX(-10%);
+    align-items:right;
+    justify-content: center;
 }
 
 /* Product Grid */
@@ -47,6 +65,13 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
 .product-list {
     display: flex;
     flex-wrap: wrap;
@@ -111,6 +136,24 @@ body {
     background-color: #c0392b;
 }
 
+.btn-disable {
+    opacity: 0.5; /* Reduce opacity to visually indicate disabled state */
+    cursor: not-allowed; /* Change cursor to indicate that the button is not clickable */
+}
+
+.btn-warning {
+    background-color: #52D7D9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    width: 10px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
 /* Pseudo-elements - Sale badge */
 .product-card::before {
     content: "SALE";
@@ -133,9 +176,11 @@ body {
     text-decoration: none;
     font-size: 20px;
 }
+
 .tag_home_link h3{
     font-size: 30px;
 }
+
 .tag a{
     text-decoration: none;
 }
