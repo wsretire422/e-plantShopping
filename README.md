@@ -15,4 +15,4 @@ Page 2 : Product Listing
 Page 3 : Shopping Cart
 -   User can see the plants that they have selected and option to increase or decrease the number of the selected plants as well as to delete it from the shoppimg cart. 
 -   User can also see the subtotal cost of each plants and the total cost for all the plants in the cart. 
--   A contine shopping button to go back to produt listing to continue shopping and a Checkout button.# coding-project-template
+-   A continue shopping button to go back to produt listing to continue shopping and a Checkout button.# coding-project-template
