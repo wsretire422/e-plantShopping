@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
+import { current } from '@reduxjs/toolkit';
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({name});
+    const [addedToCart, setAddedToCart] = useState({});
     const quantity = useSelector(state => state.cart.items);
     const dispatch = useDispatch();
     
@@ -260,7 +261,12 @@ function ProductList({ onHomeClick }) {
         setShowCart(false);
     };
 
+    let addedlist = addedToCart; // list of plants added to cart
+
     const handleAddToCart = (product) => {
+         if (Object.hasOwn(addedlist, product.name)) {
+            return;
+        };
         dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
         setAddedToCart((prevState) => ({ // Update the local state to reflect that the product has been added
             ...prevState, // Spread the previous state to retain existing entries
@@ -274,6 +280,18 @@ function ProductList({ onHomeClick }) {
         return quantity ? quantity.reduce((totalItems, item) => totalItems + item.quantity, 0) : 0; 
     };
 
+    // Update the addedToCart list when plant is deleted from cart
+    const currentCartItem = () => {
+        let addedLength = Object.keys(addedlist).length;
+        let cartLength = quantity.length;
+        if (addedLength !== cartLength) {
+            let currentCart = Object.fromEntries(quantity.map(obj => [obj.name, true]));
+            setAddedToCart(currentCart);
+        }
+    };
+
+    const cartUpdate = currentCartItem();
+
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -283,7 +301,7 @@ function ProductList({ onHomeClick }) {
                         <a href="/" onClick={(e) => handleHomeClick(e)}>
                             <div>
                                 <h3 style={{ color: 'white', marginLeft: '10px'  }}>Green Corner Nursery</h3>
-                                <i style={{ color: 'white', marginLeft: '10px'  }}>Where Green and Serenity </i>
+                                <i style={{ color: 'white', marginLeft: '10px'  }}>Where Green and Serenity Matter </i>
                             </div>
                         </a>
                     </div>
@@ -315,19 +333,29 @@ function ProductList({ onHomeClick }) {
                                         {/* Display other plant details like description and cost */}
                                         <div className="product-description">{plant.description}</div> {/* Display plant description */}
                                         <div className="product-cost">${plant.cost}</div> {/* Display plant cost */}
-                                        <button
-                                            className="product-button"
-                                            onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
-                                        >
-                                            Add to Cart
-                                        </button>
+                                        <div className="button_container" >
+                                            {Object.hasOwn(addedlist, plant.name) ? (
+                                                <>
+                                                    <button className="added-to-cart">Add to Car</button>
+                                                </>
+                                                ) : (
+                                                  <div className="button_container" >   
+                                                    <button
+                                                        className="product-button"
+                                                        onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+                                                    >   
+                                                        Add to Cart
+                                                    </button>
+                                                  </div>
+                                                )}
+                                        </div>
                                     </div>
                                 ))}
+
                             </div>
                         </div>
                     ))}
-
-                </div>
+                </div> 
             ) : (
                 <CartItem onContinueShopping={handleContinueShopping} />
             )}
