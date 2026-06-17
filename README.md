@@ -1,7 +1,10 @@
 # e-plantShopping application
+Green Corner e-plantShopping application
+
 The application will allow user to browse a variety of house plants and add them to a shopping cart. The shopping cart would allow user to view their items and their total cost as well as to adjust the number of items in the cart before checkout. 
 
-There are 3 pages
+There are 3 pages :
+
 Page 1 : Landing page
 -   A brief introduction to the company, what they do and their mission.
 -   A Get Started button to go to the product listing page
